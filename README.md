@@ -38,12 +38,59 @@ To:
   - This can be disabled by commenting out the script tag in footer.html
  - Fixed CSS issues on older versions of FF
 
-#####Addendums:
- - If you want your 'Parent Directory/' listing back in your file listings:
-  - Read: [This Issue](https://github.com/TheInsomniac/Nginx-Fancyindex-Theme/issues/1#issuecomment-43936700)
+##### Nginx config
+'''
+##
+#       /etc/nginx/webdav-patch.conf
+#       all the code required to deal with non-copliant webdav requests by Windows Explorer and MacOS Finder
+##
+        index _; # do not serve index.html etc.
 
-![Image1](https://raw.githubusercontent.com/TheInsomniac/Nginx-Fancyindex-Theme/master/images/fancyindex.png)
+        # https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/#configuring-webdav
+        # add trailing slash to make new folder
+        if ($request_method = MKCOL) {
+            rewrite ^(.*[^/])$ $1/ break;
+        }
 
-![Image1](https://raw.githubusercontent.com/TheInsomniac/Nginx-Fancyindex-Theme/master/images/fancyindex1.png)
+        # add trailing slashes when folder is renamed or copied
+        set $methdest "";
 
-![Image1](https://raw.githubusercontent.com/TheInsomniac/Nginx-Fancyindex-Theme/master/images/fancyindex2.png)
+        # if (source is folder)
+        if (-d $request_filename) {
+            rewrite ^(.*[^/])$ $1/ ;
+            set $methdest $request_method$http_destination;
+        }
+
+        # if (source is folder AND command is (move or copy) AND target does not end with "/")
+        if ($methdest ~ ^(MOVE|COPY).*[^/]$) {
+            more_set_input_headers "Destination: $http_destination/";
+        }
+
+#       add_header G-methdest $methdest always;
+
+        # https://github.com/arut/nginx-dav-ext-module/issues/52#issuecomment-598421279
+        if ($request_method = PROPPATCH) { # Unsupported, always return OK.
+            add_header  Content-Type 'text/xml';
+            return      207 '<?xml version="1.0"?><a:multistatus xmlns:a="DAV:"><a:response><a:propstat><a:status>HTTP/1.1 200 OK</a:status></a:propstat></a:response></a:multistatus>';
+        }
+
+        # filter garbage from MacOS Finder and Windows Explorer
+        location ~ "(\.(_.*|DS_Store|Spotlight-V100|TemporaryItems|Trashes|hidden|localized|DAV)$|System Volume Information$)" {
+            access_log  off;
+            error_log   off;
+
+            if ($request_method = PUT) {
+                return 403;
+            }
+            return 404;
+        }
+
+        location ~ \.metadata_never_index$ {
+            return 200 "Don't index this drive, Finder!";
+        }
+
+'''
+
+![Image1](https://raw.githubusercontent.com/ElFishi/Nginx-Fancyindex-Theme/master/images/fidx1.png)
+
+![Image1](https://raw.githubusercontent.com/ElFishi/Nginx-Fancyindex-Theme/master/images/fidx2.png)
