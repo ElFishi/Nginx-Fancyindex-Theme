@@ -19,15 +19,17 @@ To:
     #define NGX_HTTP_FANCYINDEX_NAME_LEN 500 (or some other number greater than 50)
 
 ##### Usage:
- - Compile nginx with the fancyindex module.
- - Include the contents of 'fancyindex.conf' in your location directive of your nginx conf.
- - copy the remaining items in your web root under 'fancyindex'.
+ - Compile nginx with the fancyindex module
+ - Or install nginx-extras
+ - Include the contents of 'fidx.conf' in your location directive of your nginx conf
+ - Copy 'webdav-patch.conf' to '/etc/nginx'
+ - Copy the remaining items in your web root under '.fidx'
   - header.html
   - footer.html
   - css\fancyindex.css
   - fonts\\*
   - images\breadcrumb.png
- - Restart your nginx server.
+ - Restart your nginx server
 
 ##### Added/Modified:
  - Mime type icons from [Splitbrain](http://www.splitbrain.org/projects/file_icons)
@@ -37,6 +39,10 @@ To:
  - Added HTML5 History for quicker page transitions.
   - This can be disabled by commenting out the script tag in footer.html
  - Fixed CSS issues on older versions of FF
+
+ - Added file upload
+  - Either choose files in window or drag and drop
+ - Fiddled with CSS: breadcrumbs now have borders 
 
 ##### Nginx config
 
