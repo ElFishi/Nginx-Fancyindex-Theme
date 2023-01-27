@@ -1,28 +1,17 @@
 @font-face {
-  font-family: 'ProximaNova';
-  src: url('../fonts/298CCB_2_0.eot');
-  src: url('../fonts/298CCB_2_0.eot?#iefix') format('embedded-opentype'),url('../fonts/298CCB_2_0.woff') format('woff'),url('../fonts/298CCB_2_0.ttf') format('truetype')
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/jost-400-book.woff2') format('woff2'),
+         url('../fonts/jost-400-book.woff') format('woff');
 }
 
 @font-face {
-  font-family: 'ProximaNova';
-  src: url('../fonts/298CCB_0_0.eot');
-  src: url('../fonts/298CCB_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/298CCB_0_0.woff') format('woff'),url('../fonts/298CCB_0_0.ttf') format('truetype');
-  font-weight: 300
-}
-
-@font-face {
-  font-family: 'ProximaNova';
-  src: url('../fonts/298CCB_1_0.eot');
-  src: url('../fonts/298CCB_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/298CCB_1_0.woff') format('woff'),url('../fonts/298CCB_1_0.ttf') format('truetype');
-  font-weight: 500
-}
-
-@font-face {
-  font-family: 'ProximaNova';
-  src: url('../fonts/298CCB_3_0.eot');
-  src: url('../fonts/298CCB_3_0.eot?#iefix') format('embedded-opentype'),url('../fonts/298CCB_3_0.woff') format('woff'),url('../fonts/298CCB_3_0.ttf') format('truetype');
-  font-weight: bold
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/jost-500-medium.woff2') format('woff2'),
+         url('../fonts/jost-500-medium.woff') format('woff');
 }
 
 *,
@@ -30,11 +19,11 @@
 *:after {
   box-sizing: border-box;
 }
-
+/*
 .clearfix {
-  *zoom: 1;
+  *zoom: 1; 
 }
-
+*/
 .clearfix:before,
 .clearfix:after {
   display: table;
@@ -48,33 +37,166 @@
 
 html, body {
   /* height: 100%; */
-  font-size: 100%;
+  font-size: 11pt;
+  /*font-size: 11pt; */
   background-color: #f7f7f7;
-  font-family: "ProximaNova";
+  font-family: "Jost";
 }
 
-.box {
-  border: 1px solid #d9d6d6;
-  width: 100%;
+/* keep font size fixed on mobile devices */
+html {
+  -webkit-text-size-adjust: 100%;
 }
+
+
+:focus { 
+		/* outline: 2.5px solid #555;*/ 
+		outline: none;
+		box-shadow: 1px 1px 2px 2px #666;} 
+
+
+.file-input label {
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  color:#777;
+}
+
+.file-input label:hover {
+  color:#333;
+}
+
+.file-input p {
+  padding: 1em 0;
+  margin: 0;
+}
+
+.inputlist {
+  border:1px solid #d9d6d6;
+  width:100%;
+  text-align: left;
+  padding: 0;
+}
+
+.box-button {
+  text-align:center;
+  background-color:  #f7f7f7 !important;
+}
+
+.button {
+  background: #bbb;
+  padding: 2px 10px;
+  color: #000;
+  height: auto;
+  font-weight: 500;
+  margin: auto;
+  border-left: 2px solid white;
+  border-top: 2px solid white;
+  border-right: 2px solid #555;
+  border-bottom: 2px solid #555;
+}
+
+/* https://www.w3schools.com/howto/howto_js_popup.asp
+ *   Popup container - can be anything you want 
+ */
+.popup {
+  position: relative;
+  cursor: pointer; 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 90%;
+  left: 54%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  -moz-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+/*
+ * End popup
+ */
+
+
+.box {
+  border: 1px solid #d9d6d6; 
+  width: 100%;
+  position: relative; 
+}
+
 
 .box .box-header {
   font-weight: 500;
   font-style: normal;
-  background: #f7f7f7;
+/*  background: #fcfcfc;*/
   background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#f7f7f7));
   background: -webkit-linear-gradient(top,#fff,#f7f7f7);
-  background: linear-gradient(top,#fff,#f7f7f7);
+  background: linear-gradient(to top,#fff,#f7f7f7); 
   text-transform: uppercase;
   height: 45px;
-  font-size: 16px;
-  border-bottom: 1px solid #d9d6d6;
+  font-size: 14px;
+  box-shadow: inset 0 -1px  #d9d6d6;
+/*  border-bottom: 1px solid #d9d6d6; */
 }
 
 .box .box-header .box-header-content {
   padding: 12px 20px;
-  font-weight: 700;
+  /* font-weight: 700; */
   position: relative;
+}
+
+/* block overreaching borders */
+.box-header-content:before {
+  content: " ";
+  position: absolute;
+  z-index: 1;
+  width  : 0;
+  top    : -1px;
+  bottom : 0;
+  left   : -9.999px;
+  border-left: 9px solid #f7f7f7;
 }
 
 .box .box-content {
@@ -93,14 +215,32 @@ html, body {
 
 .breadcrumbs a {
   position: relative;
-  display: inline-block;
-  padding: 8px 18px 8px 10px;
+  display : inline-block;
+  padding : 8px 18px 8px 10px;
   font-weight: 400;
   font-size: 12px;
   color: #a3a9ab;
   text-shadow: 0 1px 0 #FFF;
   -webkit-transition: 300ms color;
+  -moz-transition: 300ms color;
   transition: 300ms color;
+
+  white-space: nowrap;
+}
+
+.breadcrumbs a:before {
+  content : "";
+  position: absolute;
+  left    : -14px;
+  right   : 14px;
+  bottom  : 0;
+  top     : -1px; 
+  border-bottom: 1px solid #d9d6d6; 
+  border-top   : 1px solid #d9d6d6;
+}
+
+.breadcrumbs a:first-child:before {
+  left    : 0;
 }
 
 .breadcrumbs a:after {
@@ -111,24 +251,38 @@ html, body {
   top: 0;
   bottom: 0;
   width: 20px;
-  background: url(../images/breadcrumb.png) no-repeat center right;
+  background: url(../images/breadcrumb.png) no-repeat center right; 
+/* stroke-width: 1px;
+  background: transparent  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' height='100%' stroke-width='5px' stroke='%23d9d6d6' fill='none' stroke-linecap='round' stroke-linejoin='miter'><polyline fill='none' points='0,0 50,50 0,100'></polyline></svg>") no-repeat center right;
+*/
 }
 
 .breadcrumbs a:hover {
   color: #50b1ff;
   text-decoration: none;
-  background: none;
+/*  background: none; */
 }
 
-tbody tr:first-child {
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/*
+tbody > tr:first-child:has(a[href$="../"]) {
   display: none;
 }
+besser mit fancyindex_hide_parent_dir on*/
 
-tr.e {
+tr:nth-child(even) {
   background:#f7f7f7;
 }
 
-th,td {
+#list tbody tr:hover {
+  box-shadow: 0px 0px 1px 1px #aaa; 
+}
+
+th, td {
   padding:0.1em 0.5em;
 }
 
@@ -142,6 +296,31 @@ th {
 th > a {
   color: #333;
 }
+/*
+th > a {
+  color: #333;
+  visibility: hidden;
+  position: relative;
+}
+
+th > a:after {
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "Name";
+}
+*/
+
+td, td a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+th:nth-child(1) { width: 60% !important; }
+th:nth-child(2) { width: 12% !important; }
+th:nth-child(3) { width: 18% !important; }
 
 h1 {
   font-size: 1.5rem;
@@ -167,22 +346,30 @@ a:hover {
   color:#333;
 }
 
-@media screen and (max-width: 1024px) {
+.hidden {
+	display: none;
+}
+
+@media screen and (max-width: 749px) {
+
   tr > td:nth-child(3) {
     display: none;
   }
   thead > tr > th:nth-child(3) {
     display: none;
   }
+  th:nth-child(1) { width: 80% !important; }
+  th:nth-child(2) { width: 20% !important; }
+
   .box .box-content {
-    padding-top: 20px;
+ /*   padding-top: 20px; */
     padding-bottom: 0;
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 750px) {
 
   /* I C O N S (only on 1024+ px resolutions)
   ~~~~~~~~~~~~*/
@@ -206,167 +393,171 @@ a:hover {
   /* A P P L I C A T I O N
   ~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  #list a[href$=".doc"]:before {
+  #list a[href$=".doc" i]:before {
           background: url('../icons/doc.png') left center no-repeat;
   }
 
-  #list a[href$=".pdf"]:before {
+  #list a[href$=".pdf" i]:before {
           background: url('../icons/pdf.png') left center no-repeat;
   }
 
-  #list a[href$=".pgp"]:before {
+  #list a[href$=".pgp" i]:before {
           background: url('../icons/pgp.png') left center no-repeat;
   }
 
-  #list a[href$=".xml"]:before {
+  #list a[href$=".xml" i]:before {
           background: url('../icons/xml.png') left center no-repeat;
   }
 
-  #list a[href$=".xls"]:before {
+  #list a[href$=".xls" i]:before {
           background: url('../icons/xls.png') left center no-repeat;
   }
 
-  #list a[href$=".ppt"]:before {
+  #list a[href$=".ppt" i]:before {
           background: url('../icons/ppt.png') left center no-repeat;
   }
 
-  #list a[href$=".7z"]:before {
+  #list a[href$=".7z" i]:before {
           background: url('../icons/7z.png') left center no-repeat;
   }
 
-  #list a[href$=".torrent"]:before {
+  #list a[href$=".torrent" i]:before {
           background: url('../icons/file.png') left center no-repeat;
   }
 
-  #list a[href$=".iso"]:before {
+  #list a[href$=".iso" i]:before {
           background: url('../icons/iso.png') left center no-repeat;
   }
 
-  #list a[href$=".cue"]:before, #list a[href$=".bin"]:before {
+  #list a[href$=".cue" i]:before, #list a[href$=".bin" i]:before {
           background: url('../icons/bin.png') left center no-repeat;
   }
 
-  #list a[href$=".deb"]:before {
+  #list a[href$=".deb" i]:before {
           background: url('../icons/deb.png') left center no-repeat;
   }
 
-  #list a[href$=".exe"]:before {
+  #list a[href$=".exe" i]:before {
           background: url('../icons/file.png') left center no-repeat;
   }
 
-  #list a[href$=".swf"]:before {
+  #list a[href$=".swf" i]:before {
           background: url('../icons/swf.png') left center no-repeat;
   }
 
-  #list a[href$=".tgz"]:before, #list a[href$=".tar.gz"]:before,
-  #list a[href$=".tar.xz"]:before {
+  #list a[href$=".tgz" i]:before, #list a[href$=".tar.gz" i]:before,
+  #list a[href$=".tar.xz" i]:before {
     background: url('../icons/tgz.png') left center no-repeat;
   }
 
-  #list a[href$=".xpi"]:before {
+  #list a[href$=".xpi" i]:before {
     background: url('../icons/xpi.png') left center no-repeat;
   }
 
-  #list a[href$=".apk"]:before {
+  #list a[href$=".apk" i]:before {
     background: url('../icons/file.png') left center no-repeat;
   }
 
-  #list a[href$=".bat"]:before {
+  #list a[href$=".bat" i]:before {
           background: url('../icons/file.png') left center no-repeat;
   }
 
-  #list a[href$=".jar"]:before {
+  #list a[href$=".jar" i]:before {
           background: url('../icons/jar.png') left center no-repeat;
   }
 
-  #list a[href$=".pl"]:before {
+  #list a[href$=".pl" i]:before {
           background: url('../icons/pl.png') left center no-repeat;
   }
 
-  #list a[href$=".php"]:before {
+  #list a[href$=".php" i]:before {
           background: url('../icons/php.png') left center no-repeat;
   }
 
-  #list a[href$=".rar"]:before {
+  #list a[href$=".rar" i]:before {
           background: url('../icons/rar.png') left center no-repeat;
   }
 
-  #list a[href$=".rpm"]:before {
+  #list a[href$=".rpm" i]:before {
           background: url('../icons/rpm.png') left center no-repeat;
   }
 
-  #list a[href$=".rb"]:before {
+  #list a[href$=".rb" i]:before {
           background: url('../icons/rb.png') left center no-repeat;
   }
 
-  #list a[href$=".tar"]:before {
+  #list a[href$=".tar" i]:before {
           background: url('../icons/tar.png') left center no-repeat;
   }
 
-  #list a[href$=".zip"]:before {
+  #list a[href$=".zip" i]:before {
           background: url('../icons/zip.png') left center no-repeat;
   }
 
   /* A U D I O
   ~~~~~~~~~~~~*/
 
-  #list a[href$=".m3u"]:before {
+  #list a[href$=".m3u" i]:before {
           background: url('../icons/audio.png') left center no-repeat;
   }
 
-  #list a[href$=".mpeg"]:before {
+  #list a[href$=".mpeg" i]:before {
           background: url('../icons/mpg.png') left center no-repeat;
   }
 
-  #list a[href$=".wma"]:before {
+  #list a[href$=".wma" i]:before {
           background: url('../icons/audio.png') left center no-repeat;
   }
 
-  #list a[href$=".ogg"]:before {
+  #list a[href$=".mp3" i]:before {
+          background: url('../icons/audio.png') left center no-repeat;
+  }
+
+  #list a[href$=".ogg" i]:before {
           background: url('../icons/ogg.png') left center no-repeat;
   }
 
-  #list a[href$=".wav"]:before {
+  #list a[href$=".wav" i]:before {
           background: url('../icons/wav.png') left center no-repeat;
   }
 
 
-  #list a[href$=".flac"]:before {
+  #list a[href$=".flac" i]:before {
           background: url('../icons/audio.png') left center no-repeat;
   }
 
   /* I M A G E
   ~~~~~~~~~~~~*/
 
-  #list a[href$=".bmp"]:before, #list a[href$=".svg"]:before  {
+  #list a[href$=".bmp" i]:before, #list a[href$=".svg" i]:before  {
           background: url('../icons/image.png') left center no-repeat;
   }
 
-  #list a[href$=".gif"]:before {
+  #list a[href$=".gif" i]:before {
           background: url('../icons/gif.png') left center no-repeat;
   }
 
-  #list a[href$=".jpg"]:before, #list a[href$=".jpeg"]:before {
+  #list a[href$=".jpg" i]:before, #list a[href$=".jpeg" i]:before {
           background: url('../icons/jpeg.png') left center no-repeat;
   }
 
-  #list a[href$=".png"]:before {
+  #list a[href$=".png" i]:before {
           background: url('../icons/png.png') left center no-repeat;
   }
 
-  #list a[href$=".tiff"]:before {
+  #list a[href$=".tiff" i]:before {
           background: url('../icons/image.png') left center no-repeat;
   }
 
-  #list a[href$=".ico"]:before {
+  #list a[href$=".ico" i]:before {
           background: url('../icons/image.png') left center no-repeat;
   }
 
-  #list a[href$=".psd"]:before {
+  #list a[href$=".psd" i]:before {
           background: url('../icons/image.png') left center no-repeat;
   }
 
-  #list a[href$=".xcf"]:before {
+  #list a[href$=".xcf" i]:before {
           background: url('../icons/image.png') left center no-repeat;
   }
 
@@ -374,40 +565,40 @@ a:hover {
   /* T E X T
   ~~~~~~~~~~*/
 
-  #list a[href$=".css"]:before {
+  #list a[href$=".css" i]:before {
           background: url('../icons/css.png') left center no-repeat;
   }
 
-  #list a[href$=".htm"]:before, #list a[href$=".html"]:before,
-  #list a[href$=".md"]:before {
+  #list a[href$=".htm" i]:before, #list a[href$=".html" i]:before,
+  #list a[href$=".md" i]:before {
           background: url('../icons/html.png') left center no-repeat;
   }
 
-  #list a[href$=".txt"]:before, #list a[href$=".json"]:before {
+  #list a[href$=".txt" i]:before, #list a[href$=".json" i]:before {
           background: url('../icons/txt.png') left center no-repeat;
   }
 
-  #list a[href$=".csv"]:before {
+  #list a[href$=".csv" i]:before {
           background: url('../icons/csv.png') left center no-repeat;
   }
 
-  #list a[href$=".conf"]:before {
+  #list a[href$=".conf" i]:before {
           background: url('../icons/conf.png') left center no-repeat;
   }
 
-  #list a[href$=".rtf"]:before {
+  #list a[href$=".rtf" i]:before {
           background: url('../icons/rtf.png') left center no-repeat;
   }
 
-  #list a[href$=".bak"]:before {
+  #list a[href$=".bak" i]:before {
           background: url('../icons/file.png') left center no-repeat;
   }
 
-  #list a[href$=".c"]:before {
+  #list a[href$=".c" i]:before {
           background: url('../icons/c.png') left center no-repeat;
   }
 
-  #list a[href$=".cpp"]:before {
+  #list a[href$=".cpp" i]:before {
           background: url('../icons/cpp.png') left center no-repeat;
   }
 
@@ -423,19 +614,19 @@ a:hover {
           background: url('../icons/txt.png') left center no-repeat;
   }
 
-  #list a[href$=".java"]:before {
+  #list a[href$=".java" i]:before {
           background: url('../icons/java.png') left center no-repeat;
   }
 
-  #list a[href$=".js"]:before {
+  #list a[href$=".js" i]:before {
           background: url('../icons/js.png') left center no-repeat;
   }
 
-  #list a[href$=".h"]:before {
+  #list a[href$=".h" i]:before {
           background: url('../icons/c.png') left center no-repeat;
   }
 
-  #list a[href$=".py"]:before {
+  #list a[href$=".py" i]:before {
           background: url('../icons/py.png') left center no-repeat;
   }
 
@@ -443,24 +634,24 @@ a:hover {
           background: url('../icons/txt.png') left center no-repeat;
   }
 
-  #list a[href$=".sh"]:before {
+  #list a[href$=".sh" i]:before {
           background: url('../icons/file.png') left center no-repeat;
   }
 
-  #list a[href$=".sql"]:before {
+  #list a[href$=".sql" i]:before {
           background: url('../icons/sql.png') left center no-repeat;
   }
 
-  #list a[href$=".xml"]:before {
+  #list a[href$=".xml" i]:before {
           background: url('../icons/xml.png') left center no-repeat;
   }
 
   /* V I D E O
   ~~~~~~~~~~~~*/
 
-  #list a[href$=".avi"]:before, #list a[href$=".mp4"]:before,
-  #list a[href$=".mkv"]:before, #list a[href$=".divx"]:before,
-  #list a[href$=".wmv"]:before {
+  #list a[href$=".avi" i]:before, #list a[href$=".mp4" i]:before,
+  #list a[href$=".mkv" i]:before, #list a[href$=".divx" i]:before,
+  #list a[href$=".wmv" i]:before {
           background: url('../icons/video.png') left center no-repeat;
   }
 }

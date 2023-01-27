@@ -1,6 +1,7 @@
 NGINX FancyIndex Theme
 ===
 
+https://github.com/TheInsomniac/Nginx-Fancyindex-Theme
 A prettier theme for nginx' fancyindex module. Further details about this excellent
 module can be found at the dev's [github page](https://github.com/aperezdc/ngx-fancyindex).
 

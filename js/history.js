@@ -36,7 +36,8 @@ if (!!(window.history && history.pushState)) {
       for (var i = 0; i < segments.length; i++) {
         if (segments[i] !== '') {
           currentPath += segments[i] + '/';
-          breadcrumbs += '<a href="' +  currentPath + '">' + window.unescape(segments[i]) + '<\/a>';
+          // https://github.com/TheInsomniac/Nginx-Fancyindex-Theme/issues/17#issuecomment-782595557
+          breadcrumbs += '<a href="' +  currentPath + '">' + window.decodeURIComponent(segments[i]) + '<\/a>';
         } else if (segments.length -1 !== i) {
           currentPath += '';
           breadcrumbs += '<a href="' + currentPath + '">Root<\/a>';
@@ -54,7 +55,14 @@ if (!!(window.history && history.pushState)) {
       req = new ActiveXObject('Microsoft.XMLHTTP');
     }
     req.open('GET', href, false);
-    req.send(null);
+    // https://github.com/TheInsomniac/Nginx-Fancyindex-Theme/pull/10
+    try {
+        req.send(null);
+    } catch (e) {
+        window.location.replace(href);
+        return false;
+    }
+
     if (req.status == 200) {
       var target = document.getElementsByClassName('box-content')[0];
       var div = document.createElement('div');

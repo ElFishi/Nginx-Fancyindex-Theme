@@ -1,5 +1,18 @@
-
-</div>
+  </div>
+  <div class="box-content clearfix popup file-input" >
+    <input type="file" id="fileInput" name="name" class="hidden" multiple>
+    <label for="fileInput" class="">
+      <span id="fileInputTable" >
+        <p>Drop files or click here to select files for upload</p>
+      </span>
+      <span class="popuptext" id="myPopup">
+        No files selected!
+      </span>
+    </label>
+  </div>
+  <div id="uploadBox" class="box-content box-button">
+    <a id="upload" href="#upload" class="button">Upload files</a>
+  </div>
 </div>
 <script>
   var loc = window.location.pathname;
@@ -9,7 +22,8 @@
   for (var i=0; i<segments.length; i++) {
     if (segments[i] !== '') {
       currentPath += segments[i] + '/';
-      breadcrumbs += '<a href="' +  currentPath + '">' + window.unescape(segments[i]) + '<\/a>';
+      // https://github.com/TheInsomniac/Nginx-Fancyindex-Theme/issues/17
+      breadcrumbs += '<a href="' +  currentPath + '">' + window.decodeURIComponent(segments[i]) + '<\/a>';
     } else if (segments.length -1 !== i) {
       currentPath += '';
       breadcrumbs += '<a href="' + currentPath + '">Root<\/a>';
@@ -17,6 +31,10 @@
   }
   document.getElementById('breadcrumbs').innerHTML = breadcrumbs;
 </script>
-<script src="/fancyindex/js/history.js"></script>
+
+<script src="/.fidx/js/history.js"></script>
+
+<script src="/.fidx/js/upload.js"></script>
+
 </body>
 </html>
