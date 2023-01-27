@@ -39,11 +39,11 @@ To:
  - Fixed CSS issues on older versions of FF
 
 ##### Nginx config
-'''
-##
-#       /etc/nginx/webdav-patch.conf
-#       all the code required to deal with non-copliant webdav requests by Windows Explorer and MacOS Finder
-##
+
+    ##
+    #       /etc/nginx/webdav-patch.conf
+    #       all the code required to deal with non-copliant webdav requests by Windows Explorer and MacOS Finder
+    ##
         index _; # do not serve index.html etc.
 
         # https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/#configuring-webdav
@@ -66,7 +66,7 @@ To:
             more_set_input_headers "Destination: $http_destination/";
         }
 
-#       add_header G-methdest $methdest always;
+    #       add_header G-methdest $methdest always;
 
         # https://github.com/arut/nginx-dav-ext-module/issues/52#issuecomment-598421279
         if ($request_method = PROPPATCH) { # Unsupported, always return OK.
@@ -89,7 +89,7 @@ To:
             return 200 "Don't index this drive, Finder!";
         }
 
-'''
+
 
 ![Image1](https://raw.githubusercontent.com/ElFishi/Nginx-Fancyindex-Theme/master/images/fidx1.png)
 
