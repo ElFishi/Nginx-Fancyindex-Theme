@@ -5,7 +5,7 @@ https://github.com/TheInsomniac/Nginx-Fancyindex-Theme
 A prettier theme for nginx' fancyindex module. Further details about this excellent
 module can be found at the dev's [github page](https://github.com/aperezdc/ngx-fancyindex).
 
-####NOTE:
+#### NOTE:
 NGX-FANCYINDEX truncates the file name to 50 characters subtracts 3 and then
 appends a "..>" to the truncated name. This can be fixed by recompiling
 NGX-FANCYINDEX after changing line 55 of "ngx_http_fancyindex_module.c":
@@ -18,7 +18,7 @@ To:
 
     #define NGX_HTTP_FANCYINDEX_NAME_LEN 500 (or some other number greater than 50)
 
-#####Usage:
+##### Usage:
  - Compile nginx with the fancyindex module.
  - Include the contents of 'fancyindex.conf' in your location directive of your nginx conf.
  - copy the remaining items in your web root under 'fancyindex'.
@@ -29,7 +29,7 @@ To:
   - images\breadcrumb.png
  - Restart your nginx server.
 
-#####Added/Modified:
+##### Added/Modified:
  - Mime type icons from [Splitbrain](http://www.splitbrain.org/projects/file_icons)
   - Icons default to enabled on large devices and off on small devices like phones.
   - If you'd prefer no icons at all: copy css\fancyindex_NoIcons.css css\fancyindex.css
@@ -39,6 +39,51 @@ To:
  - Fixed CSS issues on older versions of FF
 
 ##### Nginx config
+
+html/server/location 
+
+    dav_ext_lock_zone zone=foo:10m;
+
+    server {
+
+		(...)
+
+        send_timeout 3600;
+        client_body_timeout 3600;
+        keepalive_timeout 3600;
+        lingering_timeout 3600;
+        client_max_body_size 10G;
+
+
+        location / {
+
+                client_body_temp_path /tmp/nginx_cb;
+                dav_methods PUT DELETE MKCOL COPY MOVE;
+                dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+                dav_ext_lock zone=foo;
+                create_full_put_path on;
+                dav_access user:rw group:r all:r;
+    #           autoindex on; # can't be on for fancyindex to work
+
+                fancyindex on;
+                fancyindex_localtime off;
+                fancyindex_exact_size off;
+                fancyindex_hide_parent_dir on;
+                fancyindex_header "/.fidx/header.html";
+                fancyindex_footer "/.fidx/footer.html";
+    #           fancyindex_footer "/.fidx/footer-noupload.html";
+                fancyindex_ignore ".fidx"; # source folder not to show up in the listing.
+
+                # Warning: if you use an old version of ngx-fancyindex, comment the last line if you
+                # encounter a bug. See https://github.com/Naereen/Nginx-Fancyindex-Theme/issues/10
+                fancyindex_name_length 255; # Maximum file name length in bytes, change as you like.
+
+                include webdav-patch.conf;
+        }
+    }
+
+
+/etc/nginx/webdav-patch.conf
 
     ##
     #       /etc/nginx/webdav-patch.conf
@@ -88,6 +133,7 @@ To:
         location ~ \.metadata_never_index$ {
             return 200 "Don't index this drive, Finder!";
         }
+
 
 
 
