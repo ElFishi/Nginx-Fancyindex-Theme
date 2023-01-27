@@ -252,9 +252,6 @@ html {
   bottom: 0;
   width: 20px;
   background: url(../images/breadcrumb.png) no-repeat center right; 
-/* stroke-width: 1px;
-  background: transparent  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' height='100%' stroke-width='5px' stroke='%23d9d6d6' fill='none' stroke-linecap='round' stroke-linejoin='miter'><polyline fill='none' points='0,0 50,50 0,100'></polyline></svg>") no-repeat center right;
-*/
 }
 
 .breadcrumbs a:hover {
@@ -267,12 +264,6 @@ table {
   table-layout: fixed;
   width: 100%;
 }
-
-/*
-tbody > tr:first-child:has(a[href$="../"]) {
-  display: none;
-}
-besser mit fancyindex_hide_parent_dir on*/
 
 tr:nth-child(even) {
   background:#f7f7f7;
@@ -296,21 +287,6 @@ th {
 th > a {
   color: #333;
 }
-/*
-th > a {
-  color: #333;
-  visibility: hidden;
-  position: relative;
-}
-
-th > a:after {
-  visibility: visible;
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "Name";
-}
-*/
 
 td, td a {
   white-space: nowrap;

@@ -46,14 +46,13 @@ html/server/location
 
     server {
 
-		(...)
+        (...)
 
         send_timeout 3600;
         client_body_timeout 3600;
         keepalive_timeout 3600;
         lingering_timeout 3600;
         client_max_body_size 10G;
-
 
         location / {
 
@@ -63,7 +62,7 @@ html/server/location
                 dav_ext_lock zone=foo;
                 create_full_put_path on;
                 dav_access user:rw group:r all:r;
-    #           autoindex on; # can't be on for fancyindex to work
+                # autoindex on; # can't be on for fancyindex to work
 
                 fancyindex on;
                 fancyindex_localtime off;
@@ -71,7 +70,7 @@ html/server/location
                 fancyindex_hide_parent_dir on;
                 fancyindex_header "/.fidx/header.html";
                 fancyindex_footer "/.fidx/footer.html";
-    #           fancyindex_footer "/.fidx/footer-noupload.html";
+                # fancyindex_footer "/.fidx/footer-noupload.html";
                 fancyindex_ignore ".fidx"; # source folder not to show up in the listing.
 
                 # Warning: if you use an old version of ngx-fancyindex, comment the last line if you
@@ -87,7 +86,7 @@ html/server/location
 
     ##
     #       /etc/nginx/webdav-patch.conf
-    #       all the code required to deal with non-copliant webdav requests by Windows Explorer and MacOS Finder
+    #       all the code required to deal with non-compliant webdav requests by Windows Explorer and MacOS Finder
     ##
         index _; # do not serve index.html etc.
 
@@ -110,8 +109,6 @@ html/server/location
         if ($methdest ~ ^(MOVE|COPY).*[^/]$) {
             more_set_input_headers "Destination: $http_destination/";
         }
-
-    #       add_header G-methdest $methdest always;
 
         # https://github.com/arut/nginx-dav-ext-module/issues/52#issuecomment-598421279
         if ($request_method = PROPPATCH) { # Unsupported, always return OK.
