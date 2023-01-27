@@ -24,24 +24,24 @@ To:
  * Include the contents of 'fidx.conf' in your location directive of your nginx conf
  * Copy 'webdav-patch.conf' to '/etc/nginx'
  * Copy the remaining items in your web root under '.fidx'
-  - header.html
-  - footer.html
-  - css\fancyindex.css
-  - fonts\\*
-  - images\breadcrumb.png
+   - header.html
+   - footer.html
+   - css\fancyindex.css
+   - fonts\\*
+   - images\breadcrumb.png
  * Restart your nginx server
 
 ##### Added/Modified:
  * Mime type icons from [Splitbrain](http://www.splitbrain.org/projects/file_icons)
-  - Icons default to enabled on large devices and off on small devices like phones.
-  - If you'd prefer no icons at all: copy css\fancyindex_NoIcons.css css\fancyindex.css
+   - Icons default to enabled on large devices and off on small devices like phones.
+   - If you'd prefer no icons at all: copy css\fancyindex_NoIcons.css css\fancyindex.css
  * Slightly better handling of mobile CSS click areas.
  * Added HTML5 History for quicker page transitions.
-  - This can be disabled by commenting out the script tag in footer.html
+   - This can be disabled by commenting out the script tag in footer.html
  * Fixed CSS issues on older versions of FF
 
  * Added file upload
-  - Either choose files in window or drag and drop
+   - Either choose files in window or drag and drop
  * Fiddled with CSS: breadcrumbs now have borders 
 
 ##### Nginx config
