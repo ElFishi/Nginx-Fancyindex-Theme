@@ -73,19 +73,28 @@ function doUpload(e) {
 		return;
 	}
 
-	[...files].forEach( file => {
+    var counter = 0;
+	[...files].forEach( (file,idx,files) => {
 
     	var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == XMLHttpRequest.DONE) {
+                counter++;
 				console.log(xhr.status, xhr.responseURL);
-				//location.reload();
-				swapPage(window.location.pathname);
+                if (counter === files.length ) {
+                    console.log("Uploaded last of",files.length,"files");
+                    // window.location.replace(window.location.pathname);
+                    swapPage(window.location.pathname);
+                    //setTimeout(swapPage, 500, window.location.pathname);
+                }
 			}
 		}
 
 		xhr.open("PUT", file.name);
 		xhr.setRequestHeader("Cache-Control", "no-cache");
+        // let fileDate = new Date(file.lastModified)
+        // console.log(fileDate.toGMTString()); // prints legible date
+		// xhr.setRequestHeader("Date", fileDate.toGMTString());
     	xhr.send(file);
 	});
 

@@ -1,3 +1,24 @@
+
+var updateCrumbsFunc = function () {
+  var loc = window.location.pathname;
+  var segments = loc.split('/');
+  var breadcrumbs = '';
+  var currentPath = '/';
+  for (var i = 0; i < segments.length; i++) {
+    if (segments[i] !== '') {
+      currentPath += segments[i] + '/';
+      // https://github.com/TheInsomniac/Nginx-Fancyindex-Theme/issues/17#issuecomment-782595557
+      breadcrumbs += '<a href="' +  currentPath + '">' + window.decodeURIComponent(segments[i]) + '<\/a>';
+    } else if (segments.length -1 !== i) {
+      currentPath += '';
+      // breadcrumbs += '<a href="' + currentPath + '">Root<\/a>';
+      breadcrumbs += '<a href="' + currentPath + '">' +window.location.hostname+'<\/a>';
+    }
+  }
+  document.getElementById('breadcrumbs').innerHTML = breadcrumbs;
+};
+
+
 if (!!(window.history && history.pushState)) {
 
   var addEvent = (function () {
@@ -28,26 +49,11 @@ if (!!(window.history && history.pushState)) {
 
   var updateCrumbs = function() {
     window.document.title = window.location.pathname;
-    setTimeout(function () {
-      var loc = window.location.pathname;
-      var segments = loc.split('/');
-      var breadcrumbs = '';
-      var currentPath = '/';
-      for (var i = 0; i < segments.length; i++) {
-        if (segments[i] !== '') {
-          currentPath += segments[i] + '/';
-          // https://github.com/TheInsomniac/Nginx-Fancyindex-Theme/issues/17#issuecomment-782595557
-          breadcrumbs += '<a href="' +  currentPath + '">' + window.decodeURIComponent(segments[i]) + '<\/a>';
-        } else if (segments.length -1 !== i) {
-          currentPath += '';
-          breadcrumbs += '<a href="' + currentPath + '">Root<\/a>';
-        }
-      }
-      document.getElementById('breadcrumbs').innerHTML = breadcrumbs;
-    }, 500);
+    setTimeout(updateCrumbsFunc, 500);
   };
 
   var swapPage = function(href) {
+
     var req = false;
     if (window.XMLHttpRequest) {
       req = new XMLHttpRequest();
@@ -55,6 +61,7 @@ if (!!(window.history && history.pushState)) {
       req = new ActiveXObject('Microsoft.XMLHTTP');
     }
     req.open('GET', href, false);
+    req.setRequestHeader('Cache-Control', 'no-cache, no-store, max-age=0');
     // https://github.com/TheInsomniac/Nginx-Fancyindex-Theme/pull/10
     try {
         req.send(null);
