@@ -60,30 +60,33 @@ if (!!(window.history && history.pushState)) {
     } else if (window.ActiveXObject) {
       req = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    req.open('GET', href, false);
+    req.open('GET', href);
     req.setRequestHeader('Cache-Control', 'no-cache, no-store, max-age=0');
+
+    req.onload = function() {
+      if (req.status == 200) {
+        var target = document.getElementsByClassName('box-content')[0];
+        var div = document.createElement('div');
+        div.innerHTML = req.responseText;
+        var elements = div.getElementsByClassName('box-content')[0];
+        target.innerHTML = elements.innerHTML;
+        initHistory();
+      } else {
+        // Terrible error catching implemented! Basically, if the ajax request fails
+        // we'll just refresh the entire page with the new URL.
+        window.location.replace(href);
+      }
+    };
+
     // https://github.com/TheInsomniac/Nginx-Fancyindex-Theme/pull/10
     try {
-        req.send(null);
+      req.send(null);
     } catch (e) {
-        window.location.replace(href);
-        return false;
+      window.location.replace(href);
+      return false;
     }
 
-    if (req.status == 200) {
-      var target = document.getElementsByClassName('box-content')[0];
-      var div = document.createElement('div');
-      div.innerHTML = req.responseText;
-      var elements = div.getElementsByClassName('box-content')[0];
-      target.innerHTML = elements.innerHTML;
-      initHistory();
-      return true;
-    // Terrible error catching implemented! Basically, if the ajax request fails
-    // we'll just refresh the entire page with the new URL.
-    } else {
-      window.location.replace(href);
-    }
-    return false;
+    return true;
   };
 
   var initHistory = function() {

@@ -1,7 +1,7 @@
 
 // https://www.webagesolutions.com/blog/uploading-files-using-xmlhttprequest-level-2
 
-var files;
+var files = [];
 
 
 function stopProp(ev) {
@@ -33,7 +33,7 @@ function setDropFiles(e) {
     e.stopPropagation();
     e.preventDefault();
 
-    files = e.dataTransfer.files;
+    files.push(...e.dataTransfer.files);
 	listFiles();
 
     return false;
@@ -44,7 +44,7 @@ function setInputFiles() {
 
 	const file_input = document.querySelector('#fileInput');
 
-	files = file_input.files;
+	files.push(...file_input.files);
 	listFiles();
  }
 
@@ -68,7 +68,7 @@ function listFiles() {
 
 function doUpload(e) {
 
-	if (files === undefined) {
+	if (files.length == 0) {
 		document.getElementById("myPopup").classList.toggle("show");
 		return;
 	}
@@ -100,7 +100,7 @@ function doUpload(e) {
 
 	// +++ Clean up +++
 	if (! e === undefined) { stopProp(e); }
-	files = undefined;
+	files = [];
 	document.querySelector('#fileInput').files.value = undefined;
 	document.getElementById("fileInputTable").innerHTML = "<p>Drop files or click here to select files for upload</p>";
 }
