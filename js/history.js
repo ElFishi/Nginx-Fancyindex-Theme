@@ -110,3 +110,5 @@ if (!!(window.history && history.pushState)) {
 
   initHistory();
 }
+
+updateCrumbsFunc();
