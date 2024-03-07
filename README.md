@@ -43,6 +43,9 @@ To:
  * Added file upload
    - Either choose files in window or drag and drop
  * Fiddled with CSS: breadcrumbs now have borders 
+ * When logged in with basic authentication, a logout button is shown. 
+   This requires the nginx configuration to have 
+   `add_header X-Auth-Username $remote_user;` in the server section 
 
 ##### Nginx config
 
@@ -53,6 +56,8 @@ html/server/location
     server {
 
         (...)
+
+        add_header X-Auth-Username $remote_user;
 
         send_timeout 3600;
         client_body_timeout 3600;
@@ -137,6 +142,13 @@ html/server/location
             return 200 "Don't index this drive, Finder!";
         }
 
+If the file server is run behind a reverse proxy the location directive should include: 
+
+        location / {
+            proxy_cache_bypass $http_authorization;
+            proxy_no_cache $http_authorization;
+            proxy_pass http://files;
+        }
 
 
 

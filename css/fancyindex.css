@@ -1,6 +1,14 @@
 @font-face {
     font-family: 'Jost';
     font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/jost-300-light.woff2') format('woff2'),
+         url('../fonts/jost-300-light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Jost';
+    font-style: normal;
     font-weight: 400;
     src: url('../fonts/jost-400-book.woff2') format('woff2'),
          url('../fonts/jost-400-book.woff') format('woff');
@@ -12,6 +20,14 @@
     font-weight: 500;
     src: url('../fonts/jost-500-medium.woff2') format('woff2'),
          url('../fonts/jost-500-medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/jost-700-bold.woff2') format('woff2'),
+         url('../fonts/jost-700-bold.woff') format('woff');
 }
 
 *,
@@ -35,11 +51,10 @@
   clear: both;
 }
 
-html, body {
+body, html {
   /* height: 100%; */
   font-size: 11pt;
-  /*font-size: 11pt; */
-  background-color: #f7f7f7;
+  background-color:  #f0f7ff;
   font-family: "Jost";
 }
 
@@ -81,8 +96,9 @@ html {
 .box-button {
   text-align:center;
   background-color:  #f7f7f7 !important;
+  display: grid; grid-template-columns: 1fr 5fr 1fr;
 }
-
+/*
 .button {
   background: #bbb;
   padding: 2px 10px;
@@ -94,6 +110,50 @@ html {
   border-top: 2px solid white;
   border-right: 2px solid #555;
   border-bottom: 2px solid #555;
+}
+*/
+
+.button {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  border-radius: 1px;
+  transition-property: background-color,border-color,color,box-shadow,filter;
+  transition-duration: .3s;
+  border: 1px solid transparent;
+  letter-spacing: 2px;
+  min-width: 160px;
+  text-transform: uppercase;
+  white-space: normal;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 10px 9px;
+  color: #777; /*#616467;*/
+  box-shadow: inset 0 0 0 2.6px #777; /*#616467;*/
+  background-color: transparent;
+}
+
+.button:hover{
+    color: #fff;
+    background-color: #777; /*#616467;*/
+  }
+
+
+.grid-center {
+  grid-column: 2 / -2; 
+  align-self: center;
+}
+
+.grid-right {
+  grid-column: -2 / -1; 
+  align-self: center;
+  justify-self: right;
+}
+
+.logout {
+  visibility: hidden;
 }
 
 /* https://www.w3schools.com/howto/howto_js_popup.asp
@@ -119,8 +179,9 @@ html {
   padding: 8px 0;
   position: absolute;
   z-index: 1;
-  bottom: 90%;
-  left: 54%;
+  bottom: 85%;
+  right: calc(50% - 17px);
+  /* left: 54%; */
   margin-left: -80px;
 }
 
@@ -129,7 +190,7 @@ html {
   content: "";
   position: absolute;
   top: 100%;
-  left: 50%;
+  right: 15px;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
@@ -161,8 +222,11 @@ html {
 
 
 .box {
+  background-color: #f7f7f7;
   border: 1px solid #d9d6d6; 
   width: 100%;
+  max-width: 1000px;
+  margin: auto;
   position: relative; 
 }
 
@@ -196,7 +260,7 @@ html {
   top    : -1px;
   bottom : 0;
   left   : -9.999px;
-  border-left: 9px solid #f7f7f7;
+  border-left: 9px solid #f0f7ff;
 }
 
 .box .box-content {
@@ -219,7 +283,8 @@ html {
   padding : 8px 18px 8px 10px;
   font-weight: 400;
   font-size: 12px;
-  color: #a3a9ab;
+  /* color: #a3a9ab; */
+  color: #888;
   text-shadow: 0 1px 0 #FFF;
   -webkit-transition: 300ms color;
   -moz-transition: 300ms color;
@@ -252,6 +317,9 @@ html {
   bottom: 0;
   width: 20px;
   background: url(../images/breadcrumb.png) no-repeat center right; 
+/* stroke-width: 1px;
+  background: transparent  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' height='100%' stroke-width='5px' stroke='%23d9d6d6' fill='none' stroke-linecap='round' stroke-linejoin='miter'><polyline fill='none' points='0,0 50,50 0,100'></polyline></svg>") no-repeat center right;
+*/
 }
 
 .breadcrumbs a:hover {
@@ -264,6 +332,12 @@ table {
   table-layout: fixed;
   width: 100%;
 }
+
+/*
+tbody > tr:first-child:has(a[href$="../"]) {
+  display: none;
+}
+besser mit fancyindex_hide_parent_dir on*/
 
 tr:nth-child(even) {
   background:#f7f7f7;
@@ -287,6 +361,21 @@ th {
 th > a {
   color: #333;
 }
+/*
+th > a {
+  color: #333;
+  visibility: hidden;
+  position: relative;
+}
+
+th > a:after {
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "Name";
+}
+*/
 
 td, td a {
   white-space: nowrap;
@@ -365,6 +454,10 @@ a:hover {
           background: url('../icons/folder_black.png') left center no-repeat;
   }
 
+  #list a[href$="-pw/"]:before, #list a[href*="/?"]:before {
+          background: url('../icons/padlock.png') left center no-repeat;
+  }
+
 
   /* A P P L I C A T I O N
   ~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -386,6 +479,14 @@ a:hover {
   }
 
   #list a[href$=".xls" i]:before {
+          background: url('../icons/xls.png') left center no-repeat;
+  }
+
+  #list a[href$=".xlsx" i]:before {
+          background: url('../icons/xls.png') left center no-repeat;
+  }
+
+  #list a[href$=".xlsm" i]:before {
           background: url('../icons/xls.png') left center no-repeat;
   }
 

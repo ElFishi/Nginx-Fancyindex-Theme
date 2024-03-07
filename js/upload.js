@@ -62,14 +62,14 @@ function listFiles() {
 	});
 	html += "</tbody></table>";
 	document.getElementById("fileInputTable").innerHTML = html;
-	document.getElementById("myPopup").classList.remove("show");
+	document.getElementById("filesPopup").classList.remove("show");
 }
 
 
 function doUpload(e) {
 
 	if (files.length == 0) {
-		document.getElementById("myPopup").classList.toggle("show");
+		document.getElementById("filesPopup").classList.toggle("show");
 		return;
 	}
 
